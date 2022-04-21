@@ -1,15 +1,11 @@
 <template>
   <div>
-    <Header></Header>
+    <div>
+      <Header></Header>
+    </div>
 
-    <div v-for="film in films" :key="film.id">
-      <h3>
-        {{ film.original_title }}
-      </h3>
-      <img
-        :src="'http://image.tmdb.org/t/p/w500/' + film.backdrop_path"
-        alt=""
-      />
+    <div>
+      <ListFilms :films="films"></ListFilms>
     </div>
   </div>
 </template>
