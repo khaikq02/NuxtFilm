@@ -1,5 +1,5 @@
 <template>
   <div id="app" class="bg-appBg min-h-screen">
-    <Nuxt />
+    <Nuxt keep-alive />
   </div>
 </template>
