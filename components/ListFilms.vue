@@ -1,41 +1,51 @@
 <template>
   <div>
-    <div>
+    <!-- <div class="mt-20 ml-30">
       <SearchBar></SearchBar>
-    </div>
-    <div class="mt-50 grid grid-cols-2 min-h-screen justify-items-center">
+    </div> -->
+    <div class="mt-50 grid grid-cols-3 justify-items-center">
       <div
         v-for="film in films"
         :key="film.id"
-        class="w-500 min-h-300 bg-cardBg rounded-card mt-50 text-center overflow-hidden"
+        class="bg-cardBg rounded-card mt-50 text-center overflow-hidden"
       >
-        <!-- <p>{{ film.vote_average }}</p>
-      <p>{{ film.vote_count }}</p>
-      <p>{{ film.release_date }}</p> -->
+        <div class="w-300 h-500 relative text-white card-film">
+          <div class="absolute info-film">
+            <h3 class="w-full text-textHeader font-semibold mt-10">
+              {{ film.title }}
+            </h3>
 
-        <h3 class="text-white text-text20 font-semibold p-10">
-          {{ film.title }}
-        </h3>
+            <p class="mt-30">
+              Release:
+              {{
+                new Date(film.release_date).toLocaleString('vie', {
+                  month: 'long',
+                  day: 'numeric',
+                  year: 'numeric',
+                })
+              }}
+            </p>
 
-        <div class="relative">
+            <p class="mt-10">Score Average: {{ film.vote_average }}</p>
+
+            <p class="mt-10">Vote Count: {{ film.vote_count }}</p>
+
+            <p class="overview mt-50 text-text20 font-medium">
+              {{ film.overview }}
+            </p>
+
+            <NuxtLink
+              class="bg-red-500 absolute bottom-0 mb-10 ml-10 p-10 left-0 font-bold"
+              :to="{ name: 'films-idfilm', params: { idfilm: film.id } }"
+            >
+              More Details
+            </NuxtLink>
+          </div>
           <img
-            :src="'http://image.tmdb.org/t/p/w500/' + film.poster_path"
+            :src="`http://image.tmdb.org/t/p/w500/${film.poster_path}`"
             alt=""
-            class="w-full object-cover"
+            class="object-cover w-full h-full"
           />
-
-          <!-- <p class="absolute top-2/4 text-20 mb-100 font-semibold text-white"> -->
-          <!-- Release date: {{ film.release_date }} -->
-          <!-- </p> -->
-          <p
-            class="absolute top-2/4 text-20 mb-30 font-semibold ml-10 mr-10 text-white"
-          >
-            {{ film.overview }}
-          </p>
-        </div>
-
-        <div class="text-text16 text-white bg-red-400 h-20">
-          <a href="#" class="w-full h-full bg-red-700 p-10">Get More Info</a>
         </div>
       </div>
     </div>
@@ -43,9 +53,9 @@
 </template>
 
 <script>
-import SearchBar from './SearchBar.vue'
+// import SearchBar from './SearchBar.vue'
 export default {
-  components: { SearchBar },
+  // components: { SearchBar },
   props: {
     films: {
       type: Array,
@@ -54,7 +64,28 @@ export default {
       },
     },
   },
+  methods: {},
 }
 </script>
 
-<style></style>
+<style scoped>
+.info-film {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  transform: translateX(100%);
+  transition: all 0.3s linear;
+}
+
+.card-film:hover .info-film {
+  transform: translateY(0);
+}
+
+.overview {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+</style>
