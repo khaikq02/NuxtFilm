@@ -13,7 +13,7 @@
       />
       <p class="mt-10">Status: {{ theFilm.status }}</p>
       <p class="mt-10 text-text16">{{ theFilm.overview }}</p>
-      <div class="mt-100">
+      <div class="mt-100 mb-30">
         <nuxt-link class="bg-red-500 p-10 mt-30" to="/">Back</nuxt-link>
         <a
           :href="`https://www.sonicthehedgehogmovie.com`"
